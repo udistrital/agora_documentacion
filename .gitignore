@@ -1,0 +1,4 @@
+# Evidencia local de BD: puede revelar usuarios, topologia y esquema interno.
+/docs/analisis/*.csv
+/docs/analisis/issue-18-*.sql
+/postgres - agora - public.png
