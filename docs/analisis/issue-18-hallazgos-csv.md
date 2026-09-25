@@ -1,6 +1,6 @@
 # Issue #18 — hallazgos de la primera captura
 
-Fuentes: dos capturas locales de metadatos de pruebas, revisadas el 2026-09-25. Los CSV, scripts y diagrama no se publican. Análisis sin conexión directa a la BD ni inspección de filas. Complementa [el plan](issue-18-diagnostico-modelo-plan.md).
+Fuentes: dos capturas locales de metadatos de producción, revisadas el 2026-09-25. Los CSV, scripts y diagrama no se publican. Análisis sin conexión directa a la BD ni inspección de filas. Complementa [el plan](issue-18-diagnostico-modelo-plan.md).
 
 Se confirmó ausencia de SELECT en las 173 columnas y 28 tablas. Ver la interpretación acordada al final: aún debe verificarse la estructura de negocio contenida en los JSON.
 
@@ -77,4 +77,4 @@ El responsable informa que la sincronización normalmente se realiza mediante jo
 
 La prioridad es obtener lectura limitada o resultados ejecutados por el DBA para perfilar `prov_usuario` e inspeccionar muestras desidentificadas de los JSON de proveedores y cotizaciones. Se debe establecer cobertura, relaciones, significado de eventos y regla para reconstruir el estado vigente, sin asumir que el último registro por fecha sea la verdad del negocio. La configuración `prov_dbms` es un insumo complementario si hace falta explicar referencias externas, no prueba de que se deban buscar los datos fuera.
 
-Ver [resumen actualizado y solicitud para el líder](issue-18-resumen-y-requerimientos.md). No se necesita otra ronda de consultas de permisos. Siguen pendientes calidad medida, mapeo completo, estrategia validada, PoC y aprobación técnica.
+Ver [resumen actualizado y requerimientos de esta etapa](issue-18-resumen-y-requerimientos.md). No se necesita otra ronda de consultas de permisos. Siguen pendientes calidad medida, mapeo completo, estrategia validada, PoC y aprobación técnica.

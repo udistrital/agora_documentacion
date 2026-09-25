@@ -2,14 +2,14 @@
 
 Fecha: 2026-09-25. Estado: análisis preliminar; sin conexión directa a la BD, sin conteos reales y sin PoC ejecutada. No constituye el cierre del issue.
 
-Actualización: ya se revisaron las dos capturas locales de metadatos. Ver [hallazgos y solicitud concreta al DBA](issue-18-hallazgos-csv.md). Se confirmó ausencia de SELECT en tablas y columnas. La verificación de acceso está terminada; el siguiente paso es revisar el contenido de usuarios y JSON de proveedores/cotizaciones, junto con los jobs, mediante lectura mínima o resultados ejecutados por el DBA. El plan siguiente conserva el contexto inicial.
+Actualización: ya se revisaron las dos capturas locales de metadatos. Ver [hallazgos del diagnóstico](issue-18-hallazgos-csv.md). Se confirmó ausencia de SELECT en tablas y columnas. La verificación de acceso está terminada; el siguiente paso es revisar el contenido de usuarios y JSON de proveedores/cotizaciones, junto con los jobs, mediante lectura mínima o resultados ejecutados por el DBA. El responsable confirmó que las credenciales y capturas corresponden a producción. La PoC debe realizarse en un entorno aislado con datos desidentificados.
 
 ## Evidencia y alcance
 
 - [Issue #18](https://github.com/udistrital/agora_documentacion/issues/18): exige inventario y volumen, calidad, mapeo completo, transformaciones, estrategia, PoC con 100% de consistencia e integridad de la muestra y aprobación técnica.
 - [Análisis del issue #5](issue-5-roles-modulos-agora-v1.md): inventario documental de registro, actualización, actividades económicas, certificados, acceso y cotizaciones. No acredita que la versión desplegada implemente todos esos flujos. Mantener su distinción entre respuesta del solicitante y validación del Ordenador del Gasto.
 - Diagrama entregado y revisado localmente, excluido de esta publicación: no revela los campos internos de los JSON ni acredita por sí solo el alcance completo del sistema.
-- Contexto informado por el responsable: acceso a Agora de pruebas; sin fuente del monolito ni acceso a BD de terceros; SICAPITAL administra información financiera/CDP/CRP, Titán calcula nómina, Argo crea/modifica contratos. El responsable informa que la sincronización normalmente se realiza mediante jobs; falta verificar el flujo específico Agora–terceros.
+- Contexto informado por el responsable: acceso a Agora de producción; sin fuente del monolito ni acceso a BD de terceros; SICAPITAL administra información financiera/CDP/CRP, Titán calcula nómina, Argo crea/modifica contratos. El responsable informa que la sincronización normalmente se realiza mediante jobs; falta verificar el flujo específico Agora–terceros.
 - Código consultado de `terceros_crud`, rama `develop`: [tercero](https://github.com/udistrital/terceros_crud/blob/develop/models/tercero.go), [datos_identificacion](https://github.com/udistrital/terceros_crud/blob/develop/models/datos_identificacion.go), [info_complementaria_tercero](https://github.com/udistrital/terceros_crud/blob/develop/models/info_complementaria_tercero.go), [vinculacion](https://github.com/udistrital/terceros_crud/blob/develop/models/vinculacion.go). Código disponible no equivale a DDL ni contrato desplegado.
 
 ## Lectura del modelo mostrado
@@ -45,7 +45,7 @@ No asumir igualdad de IDs Agora/terceros. Proponer una correspondencia auditable
 
 Se revisaron metadatos de contexto, esquemas, tablas, columnas, restricciones, índices, extensiones y permisos mediante consultas de solo lectura. Los scripts, CSV y diagrama permanecen locales y no forman parte de esta publicación.
 
-Las estimaciones de filas no son conteos exactos; pueden estar desactualizadas. Los resultados de pruebas no permiten extrapolar calidad o volumen de producción sin conocer fecha y método de copia. Para la siguiente fase se necesita lectura limitada o agregados y muestras desidentificadas preparados por el DBA.
+Las estimaciones de filas no son conteos exactos; pueden estar desactualizadas. La captura corresponde a producción; las estimaciones de catálogo no sustituyen conteos exactos ni mediciones de calidad. Para la siguiente fase se necesita lectura limitada o agregados y muestras desidentificadas preparados por el DBA.
 
 ## Cómo verificar la sincronización sin acceso a terceros
 
@@ -55,7 +55,7 @@ Solicitar al equipo dueño de la integración: componente/job responsable y repo
 
 Para probar consistencia se necesita una muestra conciliada en ambos extremos con IDs, fechas y resultados, manejada por un canal adecuado. Evidencia unilateral no demuestra igualdad ni completitud. La ausencia de triggers tampoco descarta integración: puede ejecutarse desde el monolito, un servicio, ETL o planificador externo.
 
-Los logs con `query` pueden orientar tablas y consultas del legado si tienen retención útil. Revisarlos localmente, extraer nombres de objetos y patrones sin literales; no enviar SQL con datos personales. Complementar con recorridos funcionales de pruebas y contratos de API. No es necesario recuperar todas las consultas antiguas para diseñar el modelo; sí las reglas, estados, cardinalidades y consumidores que debe preservar.
+Los logs con `query` pueden orientar tablas y consultas del legado si tienen retención útil. Revisarlos localmente, extraer nombres de objetos y patrones sin literales; no enviar SQL con datos personales. Complementar con recorridos funcionales en un entorno de validación aislado y contratos de API. No es necesario recuperar todas las consultas antiguas para diseñar el modelo; sí las reglas, estados, cardinalidades y consumidores que debe preservar.
 
 ## Calidad y mapeo después del inventario
 
@@ -95,4 +95,4 @@ El 100% exigido por el issue debe expresarse como resultados verificables sobre 
 
 El inventario estructural está realizado. Para cerrar #18 faltan perfilamiento del contenido, estructura interna y semántica de los JSON, contrato/versionado/catálogos de terceros, evidencia de los jobs de sincronización, mapeo completo, modelo destino validado, PoC medida y aprobación del líder/arquitecto.
 
-El siguiente insumo es una muestra desidentificada de usuarios y eventos de proveedores/cotizaciones, junto con agregados de calidad y documentación de los jobs. No se ha demostrado que los datos de negocio estén fuera de Agora. Ver el [resumen y requerimientos](issue-18-resumen-y-requerimientos.md) para la solicitud concreta. No se modificaron datos ni permisos de la BD.
+El siguiente insumo es una muestra desidentificada de usuarios y eventos de proveedores/cotizaciones, junto con agregados de calidad y documentación de los jobs. No se ha demostrado que los datos de negocio estén fuera de Agora. Ver el [resumen y requerimientos](issue-18-resumen-y-requerimientos.md) para los requerimientos de esta etapa. No se modificaron datos ni permisos de la BD.

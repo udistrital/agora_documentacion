@@ -4,25 +4,24 @@ Fecha: 2026-09-25. Estado: diagnóstico estructural realizado; análisis del con
 
 Issue: https://github.com/udistrital/agora_documentacion/issues/18
 
-## Mensaje para el líder
+## Requerimientos de esta etapa
 
-Hola, para avanzar con el diagnóstico y diseño del modelo de datos de Ágora del issue #18, ya revisé el análisis funcional, el diagrama y los metadatos de la BD de pruebas. Identificamos 28 tablas, 173 columnas y sus llaves/relaciones. El usuario disponible permite consultar metadatos, pero no tiene SELECT sobre tablas ni columnas.
+Para completar el diagnóstico del contenido se requiere:
 
-Necesito apoyo con lo siguiente:
+1. **Acceso de lectura limitado o consultas ejecutadas por el DBA** sobre `prov_usuario`, excluyendo credenciales, y muestras desidentificadas de `prov_log_proveedor`, `prov_log_cotizacion` y `prov_log_cotizacion_historico`. Revisar la estructura de `data` y `query`, tipo de evento, módulo cuando aplique, fecha e identificadores sustitutos consistentes para conservar las relaciones. Las consultas sobre producción deben ser acotadas y coordinadas con el equipo responsable.
+2. **Definición funcional de los registros:** determinar si `prov_usuario` representa cuentas, personas/proveedores o ambos; si los JSON contienen registros completos, cambios parciales o resultados de consultas; y cómo se obtiene el estado vigente. Incluir ejemplos desidentificados de creación y modificación de una misma entidad.
+3. **Documentación de los jobs de sincronización con terceros:** responsable, código o configuración sin secretos, origen/destino, dirección, frecuencia, campos sincronizados, correspondencia de IDs, manejo de errores/reintentos y evidencia de ejecución y conciliación.
+4. **Contrato vigente de terceros:** versión del API/modelo desplegado en producción, diccionario o DDL sin datos y catálogos para homologar identificación y tipos de persona. La documentación y una conciliación realizada por el equipo responsable pueden sustituir el acceso directo a su BD.
+5. **Entorno aislado para la PoC:** destino de ensayo y muestra desidentificada. La prueba de concepto de migración no se ejecutará sobre producción ni generará escrituras en servicios productivos.
 
-1. **Lectura limitada o consultas ejecutadas por el DBA** sobre `prov_usuario` —sin incluir `clave`— y una muestra desidentificada de `prov_log_proveedor`, `prov_log_cotizacion` y `prov_log_cotizacion_historico`. En los logs necesitamos revisar la estructura de `data` y `query`, junto con el tipo de evento, módulo cuando aplique, fecha e identificadores reemplazados de forma consistente para conservar las relaciones. No necesitamos un volcado completo ni credenciales.
-2. **Confirmación funcional de esos registros:** si `prov_usuario` representa cuentas, personas/proveedores o ambos; si los JSON guardan registros completos, cambios parciales o resultados de consultas; y cómo se determina el estado vigente de un proveedor o cotización. Idealmente, contar con ejemplos de creación y modificación de una misma entidad.
-3. **Información de los jobs de sincronización con terceros:** nombre y responsable, código o configuración sin secretos, origen/destino y dirección del flujo, frecuencia, campos sincronizados, correspondencia de IDs, manejo de errores/reintentos y evidencia de la última ejecución exitosa y su conciliación, si existe.
-4. **Contrato de terceros en pruebas:** versión del API/modelo, diccionario o DDL sin datos y catálogos necesarios para homologar identificación y tipos de persona. No es indispensable acceso directo a esa BD si el equipo puede facilitar el contrato y validar una muestra conciliada.
-
-Con esto podremos verificar si la información actual de Agora es suficiente para la migración, medir su calidad, construir el mapeo hacia el nuevo modelo y preparar la prueba de concepto. **Todavía no se ha concluido que los datos de negocio estén fuera de esta BD:** parte de esa estructura puede estar en los JSON y debemos comprobarlo.
+Estos insumos permitirán verificar si la información de Agora es suficiente, medir calidad y definir el mapeo. **No se ha concluido que los datos de negocio estén fuera de esta BD:** su representación puede estar en los JSON y requiere inspección.
 
 ## Qué se obtuvo
 
 | Elemento | Resultado y alcance |
 |---|---|
 | Revisión funcional | Análisis del issue #5: registro/actualización de personas, actividades económicas, certificados y cotizaciones con roles y decisiones diferenciadas. Es evidencia documental, no prueba del comportamiento desplegado. |
-| Inventario de pruebas | PostgreSQL; base `agora`, esquema de aplicación `public`; 28 tablas, 19 secuencias y 173 columnas. |
+| Inventario de producción | PostgreSQL; base `agora`, esquema de aplicación `public`; 28 tablas, 19 secuencias y 173 columnas. |
 | Integridad declarada | 25 PK, 13 FK marcadas como validadas y 25 índices asociados a PK. No equivale a una auditoría del contenido. |
 | Acceso | USAGE del esquema, sin SELECT en las 28 tablas ni en sus 173 columnas. |
 | Almacenamiento | Aproximadamente 13,32 GiB sumados de tablas, índices y TOAST; `prov_log_cotizacion` y su histórico concentran el 92,61%. No es el tamaño de una futura exportación. |
@@ -60,4 +59,4 @@ Se identificaron riesgos de diseño que requieren validación: documento sin uni
 - [Hallazgos detallados](issue-18-hallazgos-csv.md).
 - [Plan inicial de diagnóstico y migración](issue-18-diagnostico-modelo-plan.md).
 
-Este resumen no acredita cierre del issue. No se enviaron mensajes al líder ni se modificaron datos o permisos de la BD.
+Este resumen no acredita cierre del issue. El análisis realizado se limita a metadatos; no se modificaron datos ni permisos de la BD.
