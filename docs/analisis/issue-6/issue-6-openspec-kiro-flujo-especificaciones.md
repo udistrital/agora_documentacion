@@ -221,7 +221,7 @@ Skills consultadas en `/home/camilo/projects/OATI/skills-desarrollo/skills` (HEA
 
 Las rutas de skills son referencias locales al entorno consultado; no están incluidas en este repositorio. Para reproducir el piloto, proporcionar al equipo la revisión utilizada y acceso a esos archivos.
 
-Plantillas leídas en este checkout (HEAD: `7151d6755b21aafe3e72e53ed96a8bdc39fc7767`): [Analyst](../../.github/ISSUE_TEMPLATE/template-for-analyst-.md), [Developer](../../.github/ISSUE_TEMPLATE/template-for-developer-.md) y [Developer Plus](../../.github/ISSUE_TEMPLATE/template-for-developer-plus.md).
+Plantillas leídas en este checkout (HEAD: `7151d6755b21aafe3e72e53ed96a8bdc39fc7767`): [Analyst](../../../.github/ISSUE_TEMPLATE/template-for-analyst-.md), [Developer](../../../.github/ISSUE_TEMPLATE/template-for-developer-.md) y [Developer Plus](../../../.github/ISSUE_TEMPLATE/template-for-developer-plus.md).
 
 El catálogo institucional de las skills registra una auditoría del 2026-09-11 de [lineamientos_oas](https://github.com/udistrital/lineamientos_oas). La consulta web directa a la guía de ramas y a la plantilla remota Developer no devolvió contenido en esta revisión; por ello, aquí se usa la evidencia local y no se certifica su vigencia remota. Antes del piloto se deben recuperar las versiones aplicables al repositorio y stack seleccionados.
 
