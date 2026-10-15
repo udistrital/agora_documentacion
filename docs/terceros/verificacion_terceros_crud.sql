@@ -11,8 +11,8 @@ SELECT
     i.codigo_abreviacion,
     i.activo,
     i.numero_orden
-FROM terceros.grupo_info_complementaria g
-JOIN terceros.info_complementaria i
+FROM terceros_crud.grupo_info_complementaria g
+JOIN terceros_crud.info_complementaria i
     ON i.grupo_info_complementaria_id = g.id
 WHERE g.nombre IN (
     'Procedencia',
@@ -33,7 +33,7 @@ ORDER BY
 SELECT
     (
         SELECT COUNT(*)
-        FROM terceros.grupo_info_complementaria
+        FROM terceros_crud.grupo_info_complementaria
         WHERE nombre IN (
             'Procedencia',
             'Tipo de organizacion',
@@ -43,8 +43,8 @@ SELECT
     ) AS grupos_info_complementaria,
     (
         SELECT COUNT(*)
-        FROM terceros.info_complementaria i
-        JOIN terceros.grupo_info_complementaria g
+        FROM terceros_crud.info_complementaria i
+        JOIN terceros_crud.grupo_info_complementaria g
             ON g.id = i.grupo_info_complementaria_id
         WHERE g.nombre IN (
             'Procedencia',
@@ -61,7 +61,7 @@ SELECT
 SELECT
     nombre,
     COUNT(*) AS repeticiones
-FROM terceros.grupo_info_complementaria
+FROM terceros_crud.grupo_info_complementaria
 WHERE nombre IN (
     'Procedencia',
     'Tipo de organizacion',
@@ -79,8 +79,8 @@ SELECT
     g.nombre AS grupo_info_complementaria,
     i.nombre AS nombre,
     COUNT(*) AS repeticiones
-FROM terceros.info_complementaria i
-JOIN terceros.grupo_info_complementaria g
+FROM terceros_crud.info_complementaria i
+JOIN terceros_crud.grupo_info_complementaria g
     ON g.id = i.grupo_info_complementaria_id
 WHERE g.nombre IN (
     'Procedencia',
