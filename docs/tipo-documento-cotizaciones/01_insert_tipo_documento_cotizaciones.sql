@@ -30,7 +30,7 @@ INSERT INTO parametros.tipo_parametro
     (nombre, descripcion, codigo_abreviacion, activo, numero_orden,
      fecha_creacion, fecha_modificacion, area_tipo_id)
 SELECT 'Tipo de documento de Cotizaciones',
-       'Tipos de documento propios del módulo de Cotizaciones; no se modifica el catálogo de documento utilizado por el registro de personas. [Semilla: issue #41]',
+       'Documentos de Cotizaciones separados del catálogo de personas. [Semilla: issue #41]',
        'TIP_DOC_COT',
        TRUE,
        COALESCE((SELECT MAX(t.numero_orden)

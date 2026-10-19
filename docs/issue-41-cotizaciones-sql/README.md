@@ -22,6 +22,10 @@ Este paquete crea catálogos nuevos o tipos de parámetro diferenciados para el 
 
 Todos los valores se insertan con `numero_orden` explícito. Los códigos de tipo parámetro se prefijan para Cotizaciones y no modifican `TIP_DOC` ni los valores de personas de la issue #26.
 
+## Compatibilidad con el esquema de parametros_crud
+
+El modelo publicado en [`udistrital/parametros_crud`, `database/parametros.dbm`](https://github.com/udistrital/parametros_crud/blob/master/database/parametros.dbm) define `descripcion` como `VARCHAR(100)` en `area_tipo`, `tipo_parametro` y `parametro`. Por eso las descripciones de los valores se mantienen concisas: el INSERT agrega la marca `[Semilla: issue #41]`, que también cuenta dentro del límite de 100 caracteres. Esta comprobación estática no sustituye la ejecución en una base local o de pruebas.
+
 ## Catálogos que se reutilizan — no crear aquí
 
 - Actividades económicas CIIU: usar el catálogo preparado en la issue #26.

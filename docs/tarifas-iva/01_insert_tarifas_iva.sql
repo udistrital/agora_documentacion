@@ -30,7 +30,7 @@ INSERT INTO parametros.tipo_parametro
     (nombre, descripcion, codigo_abreviacion, activo, numero_orden,
      fecha_creacion, fecha_modificacion, area_tipo_id)
 SELECT 'Tarifa de IVA',
-       'Tarifas identificadas para el detalle económico de las cotizaciones. El código y la descripción representan el porcentaje; la tabla genérica parametro no dispone de una columna numérica dedicada al porcentaje. [Semilla: issue #41]',
+       'Tarifas de IVA para Cotizaciones; porcentaje en código y descripción. [Semilla: issue #41]',
        'TARIFA_IVA_COT',
        TRUE,
        COALESCE((SELECT MAX(t.numero_orden)
@@ -62,8 +62,8 @@ SELECT v.nombre,
        t.id,
        NULL
 FROM (VALUES
-    ('IVA_05', '5 %', 'Tarifa del 5 %. Valor decimal informativo para cálculos: 0.05. Aplicabilidad sujeta al régimen tributario del bien o servicio.', 1),
-    ('IVA_19', '19 %', 'Tarifa del 19 %. Valor decimal informativo para cálculos: 0.19. Aplicabilidad sujeta al régimen tributario del bien o servicio.', 2)
+    ('IVA_05', '5 %', 'Tarifa 5 %; aplicabilidad depende del bien o servicio.', 1),
+    ('IVA_19', '19 %', 'Tarifa 19 %; aplicabilidad depende del bien o servicio.', 2)
 ) AS v(codigo_abreviacion, nombre, descripcion, numero_orden)
 JOIN parametros.area_tipo a ON a.nombre = 'Gestión de Cotizaciones'
 JOIN parametros.tipo_parametro t

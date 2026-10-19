@@ -30,7 +30,7 @@ INSERT INTO parametros.tipo_parametro
     (nombre, descripcion, codigo_abreviacion, activo, numero_orden,
      fecha_creacion, fecha_modificacion, area_tipo_id)
 SELECT 'Estado de solicitud de cotización',
-       'Estados propuestos para el ciclo de vida de la solicitud; revisar contra el diagrama de transiciones de la issue #34 antes de integrar en producción. [Semilla: issue #41]',
+       'Estados de solicitud propuestos; validar transiciones con #34. [Semilla: issue #41]',
        'EST_SOL_COT',
        TRUE,
        COALESCE((SELECT MAX(t.numero_orden)
@@ -64,7 +64,7 @@ SELECT v.nombre,
 FROM (VALUES
     ('BORRADOR', 'Borrador', 'Solicitud en preparación, aún no publicada. Hipótesis del modelo #32.', 1),
     ('PUBLICADA', 'Publicada', 'Solicitud procesada y publicada para consulta. Hipótesis del modelo #32.', 2),
-    ('ABIERTA', 'Abierta', 'Solicitud abierta para recibir participación u ofertas. Hipótesis del modelo #32.', 3),
+    ('ABIERTA', 'Abierta', 'Solicitud abierta para recibir ofertas. Hipótesis #32.', 3),
     ('CERRADA', 'Cerrada', 'Finalizó el periodo de recepción. Hipótesis del modelo #32.', 4),
     ('EN_EVALUACION', 'En evaluación', 'Solicitud en etapa de evaluación de ofertas. Hipótesis del modelo #32.', 5),
     ('SELECCIONADA', 'Seleccionada', 'Existe una oferta seleccionada por el solicitante. Hipótesis del modelo #32.', 6),

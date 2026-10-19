@@ -30,7 +30,7 @@ INSERT INTO parametros.tipo_parametro
     (nombre, descripcion, codigo_abreviacion, activo, numero_orden,
      fecha_creacion, fecha_modificacion, area_tipo_id)
 SELECT 'Estado de postulación del proveedor',
-       'Estados provisionales de participación del proveedor convocado; validar su correspondencia exacta con el diagrama de issue #34. [Semilla: issue #41]',
+       'Estados propuestos de postulación; validar con diagrama #34. [Semilla: issue #41]',
        'EST_POST_COT',
        TRUE,
        COALESCE((SELECT MAX(t.numero_orden)

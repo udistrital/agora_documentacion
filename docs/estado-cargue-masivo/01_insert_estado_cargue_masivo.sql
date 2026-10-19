@@ -62,9 +62,9 @@ SELECT v.nombre,
        t.id,
        NULL
 FROM (VALUES
-    ('PROCESADO', 'Procesado', 'El archivo fue procesado sin registros rechazados. Valor propuesto; validar reglas RF-008.', 1),
-    ('PROCESADO_PARCIAL', 'Procesado parcial', 'El archivo fue procesado y contiene registros aceptados y rechazados. Valor propuesto; validar RF-008.', 2),
-    ('RECHAZADO', 'Rechazado', 'El archivo fue rechazado durante la validación o procesamiento. Valor propuesto; validar RF-008.', 3)
+    ('PROCESADO', 'Procesado', 'Archivo procesado sin registros rechazados.', 1),
+    ('PROCESADO_PARCIAL', 'Procesado parcial', 'Archivo con registros aceptados y rechazados.', 2),
+    ('RECHAZADO', 'Rechazado', 'Archivo rechazado en validación o procesamiento.', 3)
 ) AS v(codigo_abreviacion, nombre, descripcion, numero_orden)
 JOIN parametros.area_tipo a ON a.nombre = 'Gestión de Cotizaciones'
 JOIN parametros.tipo_parametro t

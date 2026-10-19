@@ -62,7 +62,7 @@ SELECT v.nombre,
        t.id,
        NULL
 FROM (VALUES
-    ('CONTRAENTREGA', 'Contraentrega', 'Pago contra entrega; el manual indica que no se diligencian condición ni porcentaje.', 1),
+    ('CONTRAENTREGA', 'Contraentrega', 'Pago contra entrega; no requiere condición ni porcentaje.', 1),
     ('PAGOS_PARCIALES', 'Pagos parciales', 'Pago mediante varias condiciones o hitos parciales.', 2)
 ) AS v(codigo_abreviacion, nombre, descripcion, numero_orden)
 JOIN parametros.area_tipo a ON a.nombre = 'Gestión de Cotizaciones'
