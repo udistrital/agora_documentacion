@@ -77,7 +77,7 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'EXTRANJERA_CON_SUCURSAL'
+        'EX_CON_SUCURSAL'
     ),
     (
         'Extranjera sin Domicilio en el País',
@@ -89,7 +89,7 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'EXTRANJERA_SIN_DOMICILIO'
+        'EX_SIN_DOM'
     );
 -- ============================================================
 -- TIPO DE ORGANIZACIÓN
@@ -242,7 +242,7 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'CAP_PRIVADO_NACIONAL'
+        'CAP_PRIV_NAL'
     ),
     (
         'Economía Mixta con aporte estatal',
@@ -254,7 +254,7 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'ECO_MIXSTA_APORTE_ESTATAL'
+        'ECO_MIX_AP_EST'
     ),
     (
         'Capital Privado con Inversión Extranjera',
@@ -266,7 +266,7 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'CAP_PRIVADO_INVERSION_EXTRANJERA'
+        'CAP_PRIV_INV_EX'
     ),
     (
         'Entidad Sin Ánimo de Lucro (Patrimonio Institucional)',
@@ -278,6 +278,6 @@ VALUES (
         TRUE,
         NOW (),
         NOW (),
-        'ENTIDAD_SIN_ANIMO_LUCRO'
+        'ESAL_PI'
     );
 COMMIT;
