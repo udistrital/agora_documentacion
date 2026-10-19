@@ -43,7 +43,7 @@ El modelo publicado en [`udistrital/parametros_crud`, `database/parametros.dbm`]
 5. **Estados de solicitud y postulación**: los valores del SQL son provisionales y no deben tratarse como contrato aprobado hasta contrastarlos con el diagrama de #34 y compartir el mapeo con quien desarrolla el CRUD (#40).
 6. **IVA**: se incluyeron 5 % y 19 % porque aparecen en #32 y se halló soporte DIAN para los casos tributarios correspondientes. Las capturas antiguas con 16 % y 10 % no se cargaron como tarifas vigentes. Este catálogo no implica que todas las operaciones se graven en esas dos tarifas ni sustituye la regla tributaria del producto concreto.
 7. **Documentos de etapas posteriores (fuera del alcance actual)**: `COTIZACION_OFERENTE`, `CERTIFICACION_BANCARIA`, `CATALOGO_TECNICO_FABRICANTE` y `CERTIFICACION_EXPERIENCIA` no se cargan en este catálogo porque corresponden a documentos de la oferta/postulación del proveedor, no a la etapa de solicitud y publicación que limita la issue #41. El rollback conserva estos códigos únicamente para limpiar filas semilla si se hubiese ejecutado una revisión anterior del script; el INSERT actual no los genera. Reconsiderarlos para carga en una issue posterior solo si se amplía el alcance funcional.
-8. **Estado actual de la BD `parametros`**: no se contó con conexión a una base local/de pruebas para consultar el contenido real de `area_tipo`, `tipo_parametro` y `parametro`. Los scripts comprueban existencia por área/tipo/código para evitar duplicados; antes de ejecutarlos se debe revisar el preflight de abajo y verificar colisiones de códigos/nombres.
+8. **Estado de la base institucional**: no se contó con conexión a la base institucional/de pruebas compartida para consultar su inventario real de `area_tipo`, `tipo_parametro` y `parametro`. Sí se ejecutaron los scripts en una base local aislada (`parametros_issue41_test`) cargada con el esquema de `parametros_crud`; esa prueba comenzó vacía y no permite concluir que no existan códigos previos en la base institucional. Antes de aplicar los scripts en un entorno compartido, revisar el preflight y reconciliar posibles colisiones de códigos/nombres.
 
 ## Códigos que debe consumir el CRUD
 
@@ -81,6 +81,22 @@ ORDER BY a.nombre, t.numero_orden, p.numero_orden;
 ```
 
 Si ya existe un tipo con el mismo nombre pero distinto código, detenerse y reconciliar el inventario en lugar de crear un duplicado. Los scripts de inserción son idempotentes respecto al área, tipo y código de parámetro. Los insert agregan la marca de origen `[Semilla: issue #41]` a las descripciones que crean. El rollback elimina únicamente filas propias identificadas por esa marca y los códigos del catálogo; no borra filas preexistentes sin marca. Los tipos y el área solo se eliminan si también fueron creados por esta semilla y quedan vacíos.
+
+## Evidencia de pruebas locales — 2026-10-19
+
+Las pruebas se ejecutaron en PostgreSQL 18, en la base aislada `parametros_issue41_test`, después de cargar el esquema publicado por `parametros_crud`. La base estaba vacía antes de las pruebas.
+
+| Validación | Resultado observado |
+|---|---|
+| Inserción individual de los nueve catálogos | Correcta |
+| Verificación individual de los nueve catálogos | Correcta |
+| Segunda ejecución individual | `INSERT 0 0` para los registros ya existentes; sin duplicados |
+| Inserción conjunta | 1 área, 9 tipos de parámetros y 31 parámetros |
+| Asociación de los nueve tipos al área `COTIZACIONES` | 9 de 9 correctas |
+| Segunda ejecución conjunta | Conteos sin cambios: 1 área, 9 tipos y 31 parámetros |
+| Rollback individual y conjunto | Correctos; al final las tablas de prueba quedaron con 0 filas de esta semilla |
+
+**Alcance de la evidencia:** estos resultados comprueban el comportamiento técnico en una base local aislada. No sustituyen la comparación con el inventario real de la base institucional, la aprobación funcional de los estados ni la coordinación de códigos con el equipo CRUD.
 
 ## Orden sugerido de aplicación
 
