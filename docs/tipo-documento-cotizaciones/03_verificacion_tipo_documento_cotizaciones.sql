@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Script   : 03_verificacion_tipo_documento_cotizaciones.sql
--- Esperado : 7 valores únicos en el catálogo Tipo de documento de Cotizaciones.
+-- Esperado : 3 valores únicos en el catálogo Tipo de documento de Cotizaciones.
 -- =============================================================================
 
 -- 1. Valores encontrados, orden, código y estado activo.
@@ -23,11 +23,7 @@ WITH esperados(codigo_abreviacion, nombre, numero_orden) AS (
   VALUES
     ('ESTUDIOS_PREVIOS', 'Estudios previos', 1),
     ('ANEXO_TECNICO', 'Anexo técnico', 2),
-    ('CDP', 'Certificado de disponibilidad presupuestal (CDP)', 3),
-    ('COTIZACION_OFERENTE', 'Cotización propia del oferente', 4),
-    ('CERTIFICACION_BANCARIA', 'Certificación bancaria', 5),
-    ('CATALOGO_TECNICO_FABRICANTE', 'Catálogo técnico del fabricante', 6),
-    ('CERTIFICACION_EXPERIENCIA', 'Certificación de experiencia', 7)
+    ('CDP', 'Certificado de disponibilidad presupuestal (CDP)', 3)
 )
 SELECT e.codigo_abreviacion,
        e.nombre AS nombre_esperado,
@@ -47,18 +43,31 @@ LEFT JOIN parametros.parametro p
   ON p.tipo_parametro_id = t.id AND p.codigo_abreviacion = e.codigo_abreviacion
 ORDER BY e.numero_orden;
 
--- 3. Conteo esperado: 7 parámetros. El resultado debe coincidir.
+-- 3. Conteo esperado: 3 parámetros dentro del alcance de solicitud/publicación.
 SELECT COUNT(*) AS cantidad_encontrada,
-       7 AS cantidad_esperada,
-       CASE WHEN COUNT(*) = 7 THEN 'OK' ELSE 'REVISAR' END AS resultado
+       3 AS cantidad_esperada,
+       CASE WHEN COUNT(*) = 3 THEN 'OK' ELSE 'REVISAR' END AS resultado
 FROM parametros.parametro p
 JOIN parametros.tipo_parametro t ON t.id = p.tipo_parametro_id
 JOIN parametros.area_tipo a ON a.id = t.area_tipo_id
 WHERE a.nombre = 'Gestión de Cotizaciones'
   AND t.codigo_abreviacion = 'TIP_DOC_COT'
-  AND p.codigo_abreviacion IN ('ESTUDIOS_PREVIOS', 'ANEXO_TECNICO', 'CDP', 'COTIZACION_OFERENTE', 'CERTIFICACION_BANCARIA', 'CATALOGO_TECNICO_FABRICANTE', 'CERTIFICACION_EXPERIENCIA');
+  AND p.codigo_abreviacion IN ('ESTUDIOS_PREVIOS', 'ANEXO_TECNICO', 'CDP');
 
--- 4. Duplicados por código o por nombre dentro del tipo (esperado: 0 filas).
+-- 4. Documentos de etapas posteriores: no deben cargarse en este catálogo en este alcance.
+SELECT p.codigo_abreviacion, p.nombre
+FROM parametros.parametro p
+JOIN parametros.tipo_parametro t ON t.id = p.tipo_parametro_id
+JOIN parametros.area_tipo a ON a.id = t.area_tipo_id
+WHERE a.nombre = 'Gestión de Cotizaciones'
+  AND t.codigo_abreviacion = 'TIP_DOC_COT'
+  AND p.codigo_abreviacion IN (
+      'COTIZACION_OFERENTE', 'CERTIFICACION_BANCARIA',
+      'CATALOGO_TECNICO_FABRICANTE', 'CERTIFICACION_EXPERIENCIA'
+  );
+-- Resultado esperado: 0 filas.
+
+-- 5. Duplicados por código o por nombre dentro del tipo (esperado: 0 filas).
 SELECT 'CODIGO' AS criterio, p.codigo_abreviacion AS valor, COUNT(*) AS repeticiones
 FROM parametros.parametro p
 JOIN parametros.tipo_parametro t ON t.id = p.tipo_parametro_id

@@ -15,7 +15,7 @@ Este paquete crea catálogos nuevos o tipos de parámetro diferenciados para el 
 | `clasificacion-requisito-documental` | `CLAS_REQ_DOC_COT` | 2 | Issue #32; RF-011: Obligatorio, Complementario |
 | `estado-cargue-masivo` | `EST_CARGUE_COT` | 3 | Issue #32: Procesado, Procesado parcial, Rechazado; hipótesis de RF-008 |
 | `motivo-rechazo-cargue` | `MOT_RECH_CARGUE_COT` | 3 | Issue #32: Tipo de dato, Valor no homologado, Campo obligatorio; lista no exhaustiva |
-| `tipo-documento-cotizaciones` | `TIP_DOC_COT` | 7 | Issue #32: estudios previos, anexo técnico, CDP, cotización propia, certificación bancaria, catálogo técnico, experiencia |
+| `tipo-documento-cotizaciones` | `TIP_DOC_COT` | 3 | Issue #32: estudios previos, anexo técnico y CDP para solicitud/publicación |
 | `estado-solicitud-cotizacion` | `EST_SOL_COT` | 9 | Estados propuestos en issue #32; deben contrastarse con el diagrama/transiciones de #34 |
 | `estado-postulacion-cotizacion` | `EST_POST_COT` | 4 | Supuesto reportado en issue #34: Invitado, Sin respuesta, Participa, Declina; validar con el diagrama |
 | `tarifas-iva` | `TARIFA_IVA_COT` | 2 | Issue #32 menciona 5 % y 19 %; DIAN confirma esos porcentajes para los supuestos tributarios aplicables. Confirmar catálogo completo con negocio |
@@ -27,7 +27,7 @@ Todos los valores se insertan con `numero_orden` explícito. Los códigos de tip
 - Actividades económicas CIIU: usar el catálogo preparado en la issue #26.
 - Tipo de contrato: consultar catálogo existente; confirmar mapeo de los valores de los mockups, sin duplicarlo aquí.
 - Unidad de medida: reutilizar valores existentes.
-- Tipos de documento del registro de personas: no modificarlos; los documentos propios de Cotizaciones están bajo el tipo diferenciado `TIP_DOC_COT`.
+- Tipos de documento del registro de personas: no modificarlos; los documentos de Cotizaciones incluidos en la etapa actual están bajo el tipo diferenciado `TIP_DOC_COT`.
 - Catálogos de personas naturales y jurídicas cubiertos por la issue #26: fuera de alcance.
 
 ## Pendientes documentados (no se crea SQL hasta confirmar la fuente/decisión)
@@ -38,7 +38,8 @@ Todos los valores se insertan con `numero_orden` explícito. Los códigos de tip
 4. **Lista definitiva de motivos de rechazo del cargue** y los tres estados del cargue masivo: el detalle completo depende de RF-008, pendiente en #34. En este avance solo se cargan los valores explícitamente nombrados en #32.
 5. **Estados de solicitud y postulación**: los valores del SQL son provisionales y no deben tratarse como contrato aprobado hasta contrastarlos con el diagrama de #34 y compartir el mapeo con quien desarrolla el CRUD (#40).
 6. **IVA**: se incluyeron 5 % y 19 % porque aparecen en #32 y se halló soporte DIAN para los casos tributarios correspondientes. Las capturas antiguas con 16 % y 10 % no se cargaron como tarifas vigentes. Este catálogo no implica que todas las operaciones se graven en esas dos tarifas ni sustituye la regla tributaria del producto concreto.
-7. **Estado actual de la BD `parametros`**: no se contó con conexión a una base local/de pruebas para consultar el contenido real de `area_tipo`, `tipo_parametro` y `parametro`. Los scripts comprueban existencia por área/tipo/código para evitar duplicados; antes de ejecutarlos se debe revisar el preflight de abajo y verificar colisiones de códigos/nombres.
+7. **Documentos de etapas posteriores (fuera del alcance actual)**: `COTIZACION_OFERENTE`, `CERTIFICACION_BANCARIA`, `CATALOGO_TECNICO_FABRICANTE` y `CERTIFICACION_EXPERIENCIA` no se cargan en este catálogo porque corresponden a documentos de la oferta/postulación del proveedor, no a la etapa de solicitud y publicación que limita la issue #41. El rollback conserva estos códigos únicamente para limpiar filas semilla si se hubiese ejecutado una revisión anterior del script; el INSERT actual no los genera. Reconsiderarlos para carga en una issue posterior solo si se amplía el alcance funcional.
+8. **Estado actual de la BD `parametros`**: no se contó con conexión a una base local/de pruebas para consultar el contenido real de `area_tipo`, `tipo_parametro` y `parametro`. Los scripts comprueban existencia por área/tipo/código para evitar duplicados; antes de ejecutarlos se debe revisar el preflight de abajo y verificar colisiones de códigos/nombres.
 
 ## Códigos que debe consumir el CRUD
 
@@ -47,7 +48,7 @@ Todos los valores se insertan con `numero_orden` explícito. Los códigos de tip
 - `CLAS_REQ_DOC_COT`: `OBLIGATORIO`, `COMPLEMENTARIO`
 - `EST_CARGUE_COT`: `PROCESADO`, `PROCESADO_PARCIAL`, `RECHAZADO` (hipótesis hasta cierre RF-008)
 - `MOT_RECH_CARGUE_COT`: `TIPO_DATO`, `VALOR_NO_HOMOLOGADO`, `CAMPO_OBLIGATORIO` (mínimo identificado)
-- `TIP_DOC_COT`: `ESTUDIOS_PREVIOS`, `ANEXO_TECNICO`, `CDP`, `COTIZACION_OFERENTE`, `CERTIFICACION_BANCARIA`, `CATALOGO_TECNICO_FABRICANTE`, `CERTIFICACION_EXPERIENCIA`
+- `TIP_DOC_COT`: `ESTUDIOS_PREVIOS`, `ANEXO_TECNICO`, `CDP`
 - `EST_SOL_COT`: `BORRADOR`, `PUBLICADA`, `ABIERTA`, `CERRADA`, `EN_EVALUACION`, `SELECCIONADA`, `VALIDADA`, `DESIERTA`, `CANCELADA` (provisional)
 - `EST_POST_COT`: `INVITADO`, `SIN_RESPUESTA`, `PARTICIPA`, `DECLINA` (provisional)
 - `TARIFA_IVA_COT`: `IVA_05`, `IVA_19` (verificar aplicabilidad por bien/servicio)

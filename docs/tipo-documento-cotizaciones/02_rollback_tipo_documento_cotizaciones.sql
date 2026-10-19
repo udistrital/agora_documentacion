@@ -12,6 +12,7 @@ WHERE p.tipo_parametro_id = t.id
   AND t.area_tipo_id = a.id
   AND a.nombre = 'Gestión de Cotizaciones'
   AND t.codigo_abreviacion = 'TIP_DOC_COT'
+  -- Los cuatro últimos códigos solo limpian filas semilla de una revisión anterior; el INSERT actual no los crea.
   AND p.codigo_abreviacion IN ('ESTUDIOS_PREVIOS', 'ANEXO_TECNICO', 'CDP', 'COTIZACION_OFERENTE', 'CERTIFICACION_BANCARIA', 'CATALOGO_TECNICO_FABRICANTE', 'CERTIFICACION_EXPERIENCIA')
   AND p.descripcion LIKE '%[Semilla: issue #41]%';
 

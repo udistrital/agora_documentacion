@@ -2,7 +2,7 @@
 -- Script   : 01_insert_tipo_documento_cotizaciones.sql
 -- Issue    : #41 - Creación de scripts SQL de los parámetros de Cotizaciones
 -- Catálogo : Tipo de documento de Cotizaciones
--- Fuente   : Issue #32, propuesta V2, catálogo tipo_documento: estudios previos, anexo técnico, CDP, cotización propia del oferente, certificación bancaria, catálogo técnico del fabricante y certificación de experiencia.
+-- Fuente   : Issue #32, propuesta V2; documentos de la etapa de solicitud/publicación: estudios previos, anexo técnico y CDP.
 -- Motor    : PostgreSQL | Esquema: parametros
 -- Orden    : area_tipo -> tipo_parametro -> parametro
 -- Idempotente: sí; identifica registros mediante códigos de abreviación.
@@ -64,11 +64,7 @@ SELECT v.nombre,
 FROM (VALUES
     ('ESTUDIOS_PREVIOS', 'Estudios previos', 'Documento de estudios previos asociado a la solicitud.', 1),
     ('ANEXO_TECNICO', 'Anexo técnico', 'Anexo que contiene las especificaciones técnicas de la solicitud.', 2),
-    ('CDP', 'Certificado de disponibilidad presupuestal (CDP)', 'Certificado de disponibilidad presupuestal asociado a la solicitud.', 3),
-    ('COTIZACION_OFERENTE', 'Cotización propia del oferente', 'Documento de cotización presentado por un oferente; su uso corresponde a la etapa posterior de postulación.', 4),
-    ('CERTIFICACION_BANCARIA', 'Certificación bancaria', 'Certificación bancaria del oferente.', 5),
-    ('CATALOGO_TECNICO_FABRICANTE', 'Catálogo técnico del fabricante', 'Catálogo técnico del fabricante aportado para sustentar la oferta.', 6),
-    ('CERTIFICACION_EXPERIENCIA', 'Certificación de experiencia', 'Certificación de experiencia del oferente.', 7)
+    ('CDP', 'Certificado de disponibilidad presupuestal (CDP)', 'Certificado de disponibilidad presupuestal asociado a la solicitud.', 3)
 ) AS v(codigo_abreviacion, nombre, descripcion, numero_orden)
 JOIN parametros.area_tipo a ON a.nombre = 'Gestión de Cotizaciones'
 JOIN parametros.tipo_parametro t
