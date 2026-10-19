@@ -4,7 +4,7 @@ BEGIN;
 -- ============================================================
 -- GRUPOS DE INFORMACIÓN COMPLEMENTARIA
 -- ============================================================
-INSERT INTO terceros_crud.grupo_info_complementaria (
+INSERT INTO terceros.grupo_info_complementaria (
         nombre,
         descripcion,
         codigo_abreviacion,
@@ -47,7 +47,7 @@ VALUES (
 -- ============================================================
 -- PROCEDENCIA
 -- ============================================================
-INSERT INTO terceros_crud.info_complementaria (
+INSERT INTO terceros.info_complementaria (
         nombre,
         grupo_info_complementaria_id,
         activo,
@@ -59,7 +59,7 @@ VALUES (
         'Nacional (Constituida en Colombia)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Procedencia'
         ),
         TRUE,
@@ -71,7 +71,7 @@ VALUES (
         'Extranjera con Sucursal en Colombia',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Procedencia'
         ),
         TRUE,
@@ -83,7 +83,7 @@ VALUES (
         'Extranjera sin Domicilio en el País',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Procedencia'
         ),
         TRUE,
@@ -94,7 +94,7 @@ VALUES (
 -- ============================================================
 -- TIPO DE ORGANIZACIÓN
 -- ============================================================
-INSERT INTO terceros_crud.info_complementaria (
+INSERT INTO terceros.info_complementaria (
         nombre,
         grupo_info_complementaria_id,
         activo,
@@ -106,7 +106,7 @@ VALUES (
         'Sociedad por Acciones Simplificada - S.A.S.',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de organizacion'
         ),
         TRUE,
@@ -118,7 +118,7 @@ VALUES (
         'Sociedad Anónima - S.A.',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de organizacion'
         ),
         TRUE,
@@ -130,7 +130,7 @@ VALUES (
         'Sociedad de Responsabilidad Limitada - Ltda.',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de organizacion'
         ),
         TRUE,
@@ -142,7 +142,7 @@ VALUES (
         'Entidad Sin Ánimo de Lucro - ESAL',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de organizacion'
         ),
         TRUE,
@@ -154,7 +154,7 @@ VALUES (
         'Sucursal de Sociedad Extranjera',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de organizacion'
         ),
         TRUE,
@@ -165,7 +165,7 @@ VALUES (
 -- ============================================================
 -- TAMAÑO EMPRESARIAL
 -- ============================================================
-INSERT INTO terceros_crud.info_complementaria (
+INSERT INTO terceros.info_complementaria (
         nombre,
         grupo_info_complementaria_id,
         activo,
@@ -177,7 +177,7 @@ VALUES (
         'Microempresa (Hasta 23.563 UVT Servicios)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tamaño de empresa'
         ),
         TRUE,
@@ -189,7 +189,7 @@ VALUES (
         'Pequeña Empresa (Hasta 204.653 UVT Servicios)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tamaño de empresa'
         ),
         TRUE,
@@ -201,7 +201,7 @@ VALUES (
         'Mediana Empresa (Hasta 483.034 UVT Servicios)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tamaño de empresa'
         ),
         TRUE,
@@ -213,7 +213,7 @@ VALUES (
         'Gran Empresa (Mayor a 483.034 UVT)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tamaño de empresa'
         ),
         TRUE,
@@ -224,7 +224,7 @@ VALUES (
 -- ============================================================
 -- TIPO DE CAPITAL
 -- ============================================================
-INSERT INTO terceros_crud.info_complementaria (
+INSERT INTO terceros.info_complementaria (
         nombre,
         grupo_info_complementaria_id,
         activo,
@@ -236,7 +236,7 @@ VALUES (
         'Capital Privado Nacional (100%)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de capital'
         ),
         TRUE,
@@ -248,7 +248,7 @@ VALUES (
         'Economía Mixta con aporte estatal',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de capital'
         ),
         TRUE,
@@ -260,7 +260,7 @@ VALUES (
         'Capital Privado con Inversión Extranjera',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de capital'
         ),
         TRUE,
@@ -272,7 +272,7 @@ VALUES (
         'Entidad Sin Ánimo de Lucro (Patrimonio Institucional)',
         (
             SELECT id
-            FROM terceros_crud.grupo_info_complementaria
+            FROM terceros.grupo_info_complementaria
             WHERE nombre = 'Tipo de capital'
         ),
         TRUE,
