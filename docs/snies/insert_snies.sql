@@ -735,7 +735,7 @@ FROM (
                 22
             ),
             (
-                'TRABAJO_SOCIAL_AFINES',
+                'TRABAJO_SOCIAL_AFIN',
                 'TRABAJO SOCIAL Y AFINES',
                 'Intervención social y promoción del bienestar.',
                 23
@@ -925,7 +925,7 @@ FROM (
                 13
             ),
             (
-                'ING_INDUSTRIAL_AFINES',
+                'ING_INDUSTRIAL_AFIN',
                 'INGENIERÍA INDUSTRIAL Y AFINES',
                 'Núcleo de conocimiento relacionado con la optimización de procesos y sistemas productivos.',
                 14
