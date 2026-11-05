@@ -13,12 +13,6 @@ AND (
     OR (ic.nombre = 'Es responsable del IVA' AND ic.codigo_abreviacion = 'RESPONSABLE_IVA')
     OR (ic.nombre = 'Reside fiscalmente en Colombia' AND ic.codigo_abreviacion = 'RESIDE_FIS_COL')
     OR (ic.nombre = 'Realiza aportes a pensión voluntaria' AND ic.codigo_abreviacion = 'PENSION_VOL')
-    OR (ic.nombre = 'HIJOS' AND ic.codigo_abreviacion = 'HIJOS')
-    OR (ic.nombre = 'NUMERO_HIJOS' AND ic.codigo_abreviacion = 'NUMERO_HIJOS')
-    OR (ic.nombre = 'CABEZA_FAMILIA' AND ic.codigo_abreviacion = 'CABEZA_FAMILIA')
-    OR (ic.nombre = 'PERSONAS_A_CARGO' AND ic.codigo_abreviacion = 'PERSONAS_A_CARGO')
-    OR (ic.nombre = 'NUMERO_PERSONAS_A_CARGO' AND ic.codigo_abreviacion = 'NUM_PERSONAS_A_CARGO')
-    OR (ic.nombre = 'DECLARANTE_RENTA' AND ic.codigo_abreviacion = 'DECLARANTE_RENTA')
 )
 RETURNING
     ic.id,

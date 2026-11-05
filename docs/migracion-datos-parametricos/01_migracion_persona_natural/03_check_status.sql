@@ -14,13 +14,7 @@ AND ic.codigo_abreviacion IN (
     'CUENTA_AFC',
     'RESPONSABLE_IVA',
     'RESIDE_FIS_COL',
-    'PENSION_VOL',
-    'HIJOS',
-    'NUMERO_HIJOS',
-    'CABEZA_FAMILIA',
-    'PERSONAS_A_CARGO',
-    'NUM_PERSONAS_A_CARGO',
-    'DECLARANTE_RENTA'
+    'PENSION_VOL'
 );
 
 -- La respuesta debe ser 0, tras la eliminación
