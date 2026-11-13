@@ -1,0 +1,115 @@
+services:
+  db-gestion:
+    image: postgres:10
+    container_name: issue66-db-gestion
+    environment:
+      POSTGRES_DB: issue66_gestion
+      POSTGRES_USER: issue66
+      POSTGRES_PASSWORD: issue66_local
+    ports:
+      - "15432:5432"
+    volumes:
+      - gestion_data:/var/lib/postgresql/data
+      - ../../../gestion_personas_crud/database/agora_proveedores.sql:/docker-entrypoint-initdb.d/01-agora-proveedores.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U issue66 -d issue66_gestion"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks:
+      - issue66
+
+  db-terceros:
+    image: postgres:10
+    container_name: issue66-db-terceros
+    environment:
+      POSTGRES_DB: issue66_terceros
+      POSTGRES_USER: issue66
+      POSTGRES_PASSWORD: issue66_local
+    ports:
+      - "15433:5432"
+    volumes:
+      - terceros_data:/var/lib/postgresql/data
+      - ../../../terceros_crud/sql/Terceros_Schema.sql:/docker-entrypoint-initdb.d/01-terceros-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U issue66 -d issue66_terceros"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks:
+      - issue66
+
+  gestion-personas-crud:
+    build:
+      context: ../../../gestion_personas_crud
+      dockerfile: ../agora_documentacion/issue-66/docker/Dockerfile.gestion_personas_crud
+    container_name: issue66-gestion-personas-crud
+    environment:
+      GESTION_PERSONAS_CRUD_APP_NAME: gestion_personas_crud
+      GESTION_PERSONAS_CRUD_HTTP_PORT: "8081"
+      GESTION_PERSONAS_CRUD_RUN_MODE: prod
+      GESTION_PERSONAS_CRUD_PGUSER: issue66
+      GESTION_PERSONAS_CRUD_PGPASS: issue66_local
+      GESTION_PERSONAS_CRUD_PGHOST: db-gestion
+      GESTION_PERSONAS_CRUD_PGPORT: "5432"
+      GESTION_PERSONAS_CRUD_PGDB: issue66_gestion
+      GESTION_PERSONAS_CRUD_PGSCHEMA: proveedores
+    ports:
+      - "18081:8081"
+    depends_on:
+      db-gestion:
+        condition: service_healthy
+    networks:
+      - issue66
+
+  terceros-crud:
+    build:
+      context: ../../../terceros_crud
+      dockerfile: ../agora_documentacion/issue-66/docker/Dockerfile.terceros_crud
+    container_name: issue66-terceros-crud
+    environment:
+      TERCEROS_CRUD_HTTP_PORT: "8082"
+      TERCEROS_CRUD_RUN_MODE: prod
+      TERCEROS_CRUD_ENABLEDOCS: "true"
+      TERCEROS_CRUD_PGUSER: issue66
+      TERCEROS_CRUD_PGPASS: issue66_local
+      TERCEROS_CRUD_PGHOST: db-terceros
+      TERCEROS_CRUD_PGPORT: "5432"
+      TERCEROS_CRUD_PGDB: issue66_terceros
+      TERCEROS_CRUD_PGSCHEMA: terceros
+      PARAMETER_STORE: ""
+    ports:
+      - "18082:8082"
+    depends_on:
+      db-terceros:
+        condition: service_healthy
+    networks:
+      - issue66
+
+  agora-mid:
+    build:
+      context: ../../../agora_mid
+      dockerfile: ../agora_documentacion/issue-66/docker/Dockerfile.agora_mid
+    container_name: issue66-agora-mid
+    environment:
+      AGORA_MID_APP_NAME: agora_mid
+      AGORA_MID_HTTP_PORT: "8080"
+      AGORA_MID_RUN_MODE: prod
+      AGORA_MID_TERCEROS_CRUD_URL: http://terceros-crud:8082
+      AGORA_MID_GESTION_PERSONAS_CRUD_URL: http://gestion-personas-crud:8081
+      AGORA_MID_PARAMETROS_CRUD_URL: http://parametros-crud:8080
+    ports:
+      - "18080:8080"
+    depends_on:
+      - gestion-personas-crud
+      - terceros-crud
+    networks:
+      - issue66
+
+volumes:
+  gestion_data:
+  terceros_data:
+
+networks:
+  issue66:
+    driver: bridge

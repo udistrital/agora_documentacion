@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 golang:1.27.1 AS builder
+WORKDIR /src
+COPY . .
+RUN GOOS=linux GOARCH=amd64 go build -o /out/main
+
+FROM --platform=linux/amd64 gcr.io/distroless/base-debian12
+WORKDIR /
+COPY --from=builder /out/main /main
+COPY --from=builder /src/conf /conf
+COPY --from=builder /src/config/relaciones_proveedor.yaml /config/relaciones_proveedor.yaml
+COPY --from=builder /src/config/global_blacklist.yaml /config/global_blacklist.yaml
+COPY --from=builder /src/swagger /swagger
+
+EXPOSE 8080
+ENTRYPOINT ["/main"]
