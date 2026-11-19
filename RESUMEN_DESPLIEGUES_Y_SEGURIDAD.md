@@ -1,5 +1,5 @@
 # AGORA: Estado de Despliegues, CI, PRs y Alertas de Seguridad
-> *Estado generado automáticamente:* `2026-11-09 05:46:16 UTC`
+> *Estado generado automáticamente:* `2026-11-14 13:16:13 UTC`
 
 ---
 ## [agora_mid](https://github.com/udistrital/agora_mid)
@@ -16,14 +16,14 @@
 
 | PR | Rama Origen | Rama Destino | Creado (UTC) | Autor |
 |---|---|---|---|---|
-| [#4 - feat(proveedor): implementar listado de proveedores](https://github.com/udistrital/agora_mid/pull/4) | `feature/49-add-collection-read` | `develop` | 2026-10-29 12:20:25 UTC | @miguelmateusp |
+| [#5 - feature: 65 integracion crud](https://github.com/udistrital/agora_mid/pull/5) | `feature/65-integracion-crud` | `develop` | 2026-11-13 21:42:07 UTC | @MrPocketMonsters |
 
 
 ### Último Despliegue por Rama
 
 | Rama Destino | Fecha Merge (UTC) | Último PR Resuelto | Autor |
 |---|---|---|---|
-| `develop` | 2026-10-28 00:29:20 UTC | [#3 - feature: 42 implementacion endpoint proveedor](https://github.com/udistrital/agora_mid/pull/3) | @MrPocketMonsters |
+| `develop` | 2026-11-09 19:26:32 UTC | [#4 - feat(proveedor): implementar listado de proveedores](https://github.com/udistrital/agora_mid/pull/4) | @miguelmateusp |
 
 ---
 
@@ -54,26 +54,25 @@
 
 ## [gestion_personas_mf](https://github.com/udistrital/gestion_personas_mf)
 - **Alertas de Seguridad (Dependabot):** ✅ Sin alertas abiertas
-- **Estado de Pull Requests:** ⚠️ **1 PR(s) pendiente(s)** (1 en `develop`)
+- **Estado de Pull Requests:** ✅ Sin PRs pendientes
 
 ### Estado CI
 
-| develop | release/0.1.0 | release/0.0.1 | master |
-| -- | -- | -- | -- |
-| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/release%2F0.1.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/release%2F0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/master)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) |
+| develop | release/0.2.0 | release/0.1.0 | release/0.0.1 | master |
+| -- | -- | -- | -- | -- |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/release%2F0.2.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/release%2F0.1.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/release%2F0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/gestion_personas_mf/status.svg?ref=refs/heads/master)](https://hubci.portaloas.udistrital.edu.co/udistrital/gestion_personas_mf/) |
 
 ### Pull Requests Pendientes por Resolver (Abiertos)
 
-| PR | Rama Origen | Rama Destino | Creado (UTC) | Autor |
-|---|---|---|---|---|
-| [#26 - feat: maquetación de la fase 3 del cliente de Cotizaciones: Solicitante](https://github.com/udistrital/gestion_personas_mf/pull/26) | `feature/issue-56/modulo-cotizaciones-fase-3` | `develop` | 2026-11-06 14:43:40 UTC | @RANDRESS23 |
+✅ *Sin PRs pendientes por resolver en este repositorio.*
+
 
 
 ### Último Despliegue por Rama
 
 | Rama Destino | Fecha Merge (UTC) | Último PR Resuelto | Autor |
 |---|---|---|---|
-| `develop` | 2026-11-05 11:35:57 UTC | [#25 - feat: ajustar maquetación de los formularios de registro de proveedores ](https://github.com/udistrital/gestion_personas_mf/pull/25) | @RANDRESS23 |
+| `develop` | 2026-11-13 10:12:22 UTC | [#27 - feat: maquetación de las vistas pendientes de Cotizaciones](https://github.com/udistrital/gestion_personas_mf/pull/27) | @RANDRESS23 |
 | `release/0.0.1` | 2026-10-28 13:31:31 UTC | [#22 - hotfix: update the client scripts routes](https://github.com/udistrital/gestion_personas_mf/pull/22) | @milo19980525 |
 
 ---
@@ -104,7 +103,7 @@
 
 ## [gestion_personas_crud](https://github.com/udistrital/gestion_personas_crud)
 - **Alertas de Seguridad (Dependabot):** ✅ Sin alertas abiertas
-- **Estado de Pull Requests:** ⚠️ **2 PR(s) pendiente(s)** (2 en `develop`)
+- **Estado de Pull Requests:** ✅ Sin PRs pendientes
 
 ### Estado CI
 
@@ -114,16 +113,14 @@
 
 ### Pull Requests Pendientes por Resolver (Abiertos)
 
-| PR | Rama Origen | Rama Destino | Creado (UTC) | Autor |
-|---|---|---|---|---|
-| [#5 - feat: 22 total getall y tests](https://github.com/udistrital/gestion_personas_crud/pull/5) | `feature/22-total-getall` | `develop` | 2026-10-29 12:36:34 UTC | @icheld123 |
-| [#2 - feat: 37 modelo extendido](https://github.com/udistrital/gestion_personas_crud/pull/2) | `feature/37-modelo-extendido` | `develop` | 2026-10-13 21:31:12 UTC | @MrPocketMonsters |
+✅ *Sin PRs pendientes por resolver en este repositorio.*
+
 
 
 ### Último Despliegue por Rama
 
 | Rama Destino | Fecha Merge (UTC) | Último PR Resuelto | Autor |
 |---|---|---|---|
-| `develop` | 2026-10-29 17:02:37 UTC | [#4 - feat: ajustes esquema](https://github.com/udistrital/gestion_personas_crud/pull/4) | @MrPocketMonsters |
+| `develop` | 2026-11-13 10:16:05 UTC | [#9 - feat: 63 pruebas unitarias](https://github.com/udistrital/gestion_personas_crud/pull/9) | @icheld123 |
 
 ---

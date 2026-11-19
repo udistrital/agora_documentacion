@@ -1,4 +1,4 @@
--- Verificación 1: conteo por tabla (esperado: 1 / 14 / 140)
+-- Verificación 1: conteo por tabla (esperado: 1 / 5 / 140)
 SELECT
     (
         SELECT COUNT(*)
@@ -18,16 +18,7 @@ SELECT
               'Responsabilidad fiscal',
               'Tipo de representación',
               'Tipo de declaración',
-              'Tipo de documento',
-              'Cuenta con beneficiarios finales reportados en el RUB',
-              'Cotiza en bolsa de valores de Colombia (BVC)',
-              'Obligación a contar con revisor fiscal',
-              'Gran contribuyente DIAN',
-              'Autorretenedor en renta',
-              'Aplica exención ICA Bogotá',
-              'RUP Vigente',
-              'Obligación de factura electrónica',
-              'Operaciones en moneda extranjera'
+              'Tipo de documento'
           )
     ) AS tipo_parametro,
     (
@@ -44,16 +35,7 @@ SELECT
               'Responsabilidad fiscal',
               'Tipo de representación',
               'Tipo de declaración',
-              'Tipo de documento',
-              'Cuenta con beneficiarios finales reportados en el RUB',
-              'Cotiza en bolsa de valores de Colombia (BVC)',
-              'Obligación a contar con revisor fiscal',
-              'Gran contribuyente DIAN',
-              'Autorretenedor en renta',
-              'Aplica exención ICA Bogotá',
-              'RUP Vigente',
-              'Obligación de factura electrónica',
-              'Operaciones en moneda extranjera'
+              'Tipo de documento'
           )
     ) AS parametro;
 
@@ -112,16 +94,7 @@ WHERE a.nombre = 'Información Tributaria'
       'Responsabilidad fiscal',
       'Tipo de representación',
       'Tipo de declaración',
-      'Tipo de documento',
-      'Cuenta con beneficiarios finales reportados en el RUB',
-      'Cotiza en bolsa de valores de Colombia (BVC)',
-      'Obligación a contar con revisor fiscal',
-      'Gran contribuyente DIAN',
-      'Autorretenedor en renta',
-      'Aplica exención ICA Bogotá',
-      'RUP Vigente',
-      'Obligación de factura electrónica',
-      'Operaciones en moneda extranjera'
+      'Tipo de documento'
   )
 GROUP BY
     t.id,
@@ -148,16 +121,7 @@ WHERE a.nombre = 'Información Tributaria'
       'Responsabilidad fiscal',
       'Tipo de representación',
       'Tipo de declaración',
-      'Tipo de documento',
-      'Cuenta con beneficiarios finales reportados en el RUB',
-      'Cotiza en bolsa de valores de Colombia (BVC)',
-      'Obligación a contar con revisor fiscal',
-      'Gran contribuyente DIAN',
-      'Autorretenedor en renta',
-      'Aplica exención ICA Bogotá',
-      'RUP Vigente',
-      'Obligación de factura electrónica',
-      'Operaciones en moneda extranjera'
+      'Tipo de documento'
   )
 GROUP BY
     t.id,
@@ -185,16 +149,7 @@ WHERE a.nombre = 'Información Tributaria'
       'Responsabilidad fiscal',
       'Tipo de representación',
       'Tipo de declaración',
-      'Tipo de documento',
-      'Cuenta con beneficiarios finales reportados en el RUB',
-      'Cotiza en bolsa de valores de Colombia (BVC)',
-      'Obligación a contar con revisor fiscal',
-      'Gran contribuyente DIAN',
-      'Autorretenedor en renta',
-      'Aplica exención ICA Bogotá',
-      'RUP Vigente',
-      'Obligación de factura electrónica',
-      'Operaciones en moneda extranjera'
+      'Tipo de documento'
   )
   AND (
       p.activo IS DISTINCT FROM TRUE
@@ -220,16 +175,7 @@ WHERE a.nombre = 'Información Tributaria'
       'Responsabilidad fiscal',
       'Tipo de representación',
       'Tipo de declaración',
-      'Tipo de documento',
-      'Cuenta con beneficiarios finales reportados en el RUB',
-      'Cotiza en bolsa de valores de Colombia (BVC)',
-      'Obligación a contar con revisor fiscal',
-      'Gran contribuyente DIAN',
-      'Autorretenedor en renta',
-      'Aplica exención ICA Bogotá',
-      'RUP Vigente',
-      'Obligación de factura electrónica',
-      'Operaciones en moneda extranjera'
+      'Tipo de documento'
   )
 GROUP BY
     t.id,
